@@ -1,18 +1,8 @@
-const menuButton = document.getElementById('menuButton');
-const menu = document.getElementById('menu');
-
-menuButton.addEventListener('click', function(){
-
-    if (menu.style.display === 'none') {
-        menu.style.display = 'block';
-        // menuButton.textContent = ;
-        menu.style.transition = '0.9s';
-        
-    } else {
-        menu.style.display = 'none';
-        // menuButton.textContent = ; 
-    }
-});
+let menuButton = document.getElementById("menuButton");
+     let menu = document.getElementById("menu");
+     menuButton.addEventListener("click", function(){
+     menu.classList.toggle("active")
+     });
 let currentSlideIndex = 0;
 const slides = document.querySelectorAll(".carousel-item");
 const dots = document.querySelectorAll(".dot");
