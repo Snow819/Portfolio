@@ -9,6 +9,7 @@ body{
     background-color:#141516;
     transition: background-color 0.5s ease;
     color: white;
+    overflow-x: hidden;
 }
 /* From Uiverse.io by AqFox */ 
 /* From Uiverse.io by Nawsome */ 
@@ -162,17 +163,6 @@ nav a:hover{
   color:   #ac04ac;
   transition: 0.9s;
   cursor: pointer;
-}
-.portfolio-dark-theme{
-    color: white;
-}
-.portfolio-dark-theme button{
-    background-color: inherit;
-    position: fixed;
-    right: 30px;
-    top: 10px;
-    color: white;
-    font-size: 150%;
 }
 nav li:first-child{
     border-right: none;
@@ -337,6 +327,8 @@ letter-spacing: normal;
     line-height: 64px;
     letter-spacing: -0.567337px;
     margin-bottom: 1.5cm;
+    display: flex;
+    flex-wrap: wrap;
     
 }
 /* PORTFOLIO-EXPERTISE ENDS============ */
@@ -625,7 +617,7 @@ footer b:hover{
 }
 
 /* ========FOOTER ENDS============= */
-@media (1200px <= width <= 1408px )  {
+@media (768px <= width <= 1408px )  {
  *{
     margin: 0;
     padding: 0;
@@ -636,42 +628,77 @@ footer b:hover{
     font-family: "Public Sans", serif;
     font-optical-sizing: auto;
     font-style: normal;
-    font-size:clamp(10px,15px,20px);
+    font-size:clamp(5px,10vh,15px);
     position: fixed;
-    top: 0;
-    left: 10%;
-    right: 10%;
+    top:    0;
+    left: 5.2%;
+    right: 6%;
     background-color:#141516; 
     z-index:100;
     padding: none;  
-} 
+}
+nav li{
+    flex-wrap: nowrap;
+}
+nav button{
+    color: white;
+    display: none;
+}
+nav ul{
+    display: flex;
+}
+nav a:hover{
+  color:   #ac04ac;
+  transition: 0.9s;
+  cursor: pointer;
+}
+nav li:first-child{
+    border-right: none;
+}
+nav li:nth-last-child(2){
+    border-right: none;
+    border-left: none;
+}
 nav h6{
     outline: 1px solid rgba(128, 128, 128, 0.288);
-     padding: 31px 0; 
-     padding-right: 90px;
-    padding-left: 17px; 
+    padding: 11px 0; 
+    padding-right: 120px;
+    padding-left: 20px; 
     background-color:#141516;
     color: white;
-    font-size:clamp(15px, 10px, 5px);
+    font-size: 90%;
     /* padding-bottom: 0; */
+}
+nav a{
+    color: white;
+    font-size: 100%;
+    font-weight: 500; 
 }
 nav li{
     outline: 1px solid rgba(128, 128, 128, 0.288);
-    padding: 31px 0;
-    padding-right: 90px;
-    padding-left: 17px;
+    padding: 11px 0;
+    padding-right: 120px;
+    padding-left: 20px;
     background-color:#141516;
     color: white;
-     font-size:100%;
-    
-}  
+    font-size:clamp(5px, 10vh, 15px);
 
+    /* flex-wrap: nowrap; */
+    
+}
+nav li.active{
+    background-color: green;
+}
+.portfolio-about p{
+    font-size: clamp(10px, 15vh, 20px);
+}
 }
 @media screen and (max-width: 768px){
     *{
         margin: 0;
         padding: 0;
-        overflow-x:hidden;
+        /* overflow-x:hidden !important; */
+        /* overflow-inline: hidden; */
     }
     .portfolio-about-info button{
         width: 100%;
@@ -683,7 +710,7 @@ nav li{
     }
     nav{
         display: flex;
-        justify-content: space-evenly;
+        /* justify-content: space-evenly; */
         gap: 0px;
         position: fixed;
         top: 0;
@@ -702,26 +729,35 @@ nav li{
      .bi-list{
         font-size: 190%;
         position: fixed;
+        /* left: 10; */
      }
 
     .hero_page_list{
         display: flex;
-        flex-direction: column;
+        flex-direction: column !important;
         align-items: center;
         position: fixed;
-        right: -100%;
-        height: 100vh;
-        top: 20px; 
-        z-index: 1000px;
-        background-color: blueviolet;
+        right: -100% !important;
+        height: 100vh !important;
+        top:25%; 
+        z-index: 100px !important;
+        background-color:#141516;
+
+        /* background-color: blueviolet; */
     }
     .hero_page_list.active{
-        right: 0;
+        right: 0 !important;
     }
-     nav li{
+       
+     nav ul li{
         outline: none;
+        display: flex;
+        flex-direction: column;
+        background-color:#141516;
+        /* min-height: 100vh; */
+     }
+     nav a{
         display: block;
-        background-color: red;
      }
      nav h6{
         outline: none;
@@ -783,6 +819,7 @@ nav li{
     }
     .portfolio-expertise h2{
         font-size: clamp(30px, 35px, 40px);
+        
     }
     .portfolio-Experience{
         padding-left:20px;
