@@ -424,6 +424,10 @@ nav button {
     transform-origin: right top;
 }
 
+.hero__socials li {
+    list-style: none;
+}
+
 .hero__socials a {
     color: #808080;
     font-size: 0.9rem;
