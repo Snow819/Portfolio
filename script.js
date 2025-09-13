@@ -1,110 +1,232 @@
-let menuButton = document.getElementById("menuButton");
-     let menu = document.getElementById("menu");
-     menuButton.addEventListener("click", function(){
-     menu.classList.toggle("active")
-     });
-let currentSlideIndex = 0;
-const slides = document.querySelectorAll(".carousel-item");
-const dots = document.querySelectorAll(".dot");
+const menuButton = document.getElementById("menuButton");
+const menu = document.getElementById("menu");
+const menuIcon = document.getElementById("menuIcon");
 
-function showSlide(index) {
-  slides.forEach((slide, i) => {
-    slide.classList.remove("active");
-    dots[i].classList.remove("active");
-    if (i === index) {
-      slide.classList.add("active");
-      dots[i].classList.add("active");
+menuButton.addEventListener("click", () => {
+  menu.classList.toggle("show");
+
+  // toggle between hamburger and close icon
+  if (menu.classList.contains("show")) {
+    menuIcon.classList.remove("bi-list");
+    menuIcon.classList.add("bi-x"); // close icon
+  } else {
+    menuIcon.classList.remove("bi-x");
+    menuIcon.classList.add("bi-list"); // hamburger icon
+  }
+});
+
+// carousel
+
+class TestimonialCarousel {
+  constructor() {
+    this.currentSlide = 0;
+    this.totalSlides = 7;
+    this.autoPlayInterval = null;
+    this.autoPlayDelay = 5000;
+
+    this.initializeElements();
+    this.bindEvents();
+    this.startAutoPlay();
+  }
+
+  initializeElements() {
+    this.carousel = document.querySelector('.carousel-container');
+    this.prevBtn = document.getElementById('prev');
+    this.nextBtn = document.getElementById('next');
+    this.dots = document.querySelectorAll('.dot');
+  }
+
+  bindEvents() {
+    // Navigation buttons
+    this.prevBtn.addEventListener('click', () => this.prevSlide());
+    this.nextBtn.addEventListener('click', () => this.nextSlide());
+
+    // Dot indicators
+    this.dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => this.goToSlide(index));
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') this.prevSlide();
+      if (e.key === 'ArrowRight') this.nextSlide();
+    });
+
+    // Touch/swipe support
+    let startX = 0;
+    let endX = 0;
+
+    this.carousel.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      this.pauseAutoPlay();
+    });
+
+    this.carousel.addEventListener('touchmove', (e) => {
+      e.preventDefault();
+    });
+
+    this.carousel.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].clientX;
+      const diff = startX - endX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          this.nextSlide();
+        } else {
+          this.prevSlide();
+        }
+      }
+      this.startAutoPlay();
+    });
+
+    // Pause autoplay on hover
+    const section = document.querySelector('.testimonial-section');
+    section.addEventListener('mouseenter', () => this.pauseAutoPlay());
+    section.addEventListener('mouseleave', () => this.startAutoPlay());
+  }
+
+  goToSlide(slideIndex) {
+    this.currentSlide = slideIndex;
+    this.updateCarousel();
+    this.updateDots();
+    this.resetAutoPlay();
+  }
+
+  nextSlide() {
+    this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+    this.updateCarousel();
+    this.updateDots();
+    this.resetAutoPlay();
+  }
+
+  prevSlide() {
+    this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+    this.updateCarousel();
+    this.updateDots();
+    this.resetAutoPlay();
+  }
+
+  updateCarousel() {
+    const translateX = -this.currentSlide * (100 / this.totalSlides);
+    this.carousel.style.transform = `translateX(${translateX}%)`;
+  }
+
+  updateDots() {
+    this.dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === this.currentSlide);
+    });
+  }
+
+  startAutoPlay() {
+    this.pauseAutoPlay();
+    this.autoPlayInterval = setInterval(() => {
+      this.nextSlide();
+    }, this.autoPlayDelay);
+  }
+
+  pauseAutoPlay() {
+    if (this.autoPlayInterval) {
+      clearInterval(this.autoPlayInterval);
+      this.autoPlayInterval = null;
     }
+  }
+
+  resetAutoPlay() {
+    this.startAutoPlay();
+  }
+}
+
+// Initialize carousel when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+  new TestimonialCarousel();
+});
+
+// Add some visual feedback animations
+document.addEventListener('DOMContentLoaded', () => {
+  // Add entrance animation
+  const testimonialSection = document.querySelector('.testimonial-section');
+  testimonialSection.style.opacity = '0';
+  testimonialSection.style.transform = 'translateY(50px)';
+
+  setTimeout(() => {
+    testimonialSection.style.transition = 'all 0.8s ease';
+    testimonialSection.style.opacity = '1';
+    testimonialSection.style.transform = 'translateY(0)';
+  }, 100);
+});
+
+// Add smooth scroll behavior for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Add intersection observer for animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = '1';
+      entry.target.style.transform = 'translateY(0)';
+    }
+  });
+}, observerOptions);
+
+// Observe contact cards for staggered animation
+document.querySelectorAll('.contact-card').forEach(card => {
+  observer.observe(card);
+});
+
+// Add click tracking for analytics (placeholder)
+document.querySelectorAll('.contact-link, .social-link, .cta-button').forEach(link => {
+  link.addEventListener('click', function () {
+    // Analytics tracking would go here
+    console.log(`Contact interaction: ${this.textContent.trim()}`);
+  });
+});
+
+// Add copy to clipboard functionality for email and phone
+function copyToClipboard(text, element) {
+  navigator.clipboard.writeText(text).then(() => {
+    const originalText = element.textContent;
+    element.textContent = 'Copied!';
+    element.style.color = '#ac04ac';
+
+    setTimeout(() => {
+      element.textContent = originalText;
+      element.style.color = '';
+    }, 2000);
   });
 }
 
-function currentSlide(index) {
-  currentSlideIndex = index;
-  showSlide(index);
-}
+// Add click handlers for copy functionality
+document.addEventListener('DOMContentLoaded', () => {
+  const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+  const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
 
-// Auto-rotate slides every 5 seconds
-setInterval(() => {
-  currentSlideIndex = (currentSlideIndex + 1) % slides.length;
-  showSlide(currentSlideIndex);
-}, 5000);
-// Wait for the window to load  
-window.addEventListener('load', () => {  
-  // Hide the preloader  
-  document.getElementById('preloader').style.display = 'block';  
-  // Show the main content  
-  document.getElementById('content').style.display = 'none';  
-});
-window.addEventListener('load', () => {  
-  setTimeout(() => {  
-      document.getElementById('preloader').style.display = 'none';  
-      document.getElementById('content').style.display = 'block';  
-  }, 3000); // Adjust the time as needed  
-});
-document.addEventListener('DOMContentLoaded', function () {  
-  const element = document.querySelector('.portfolio-about');  
-  const elementPosition = element.getBoundingClientRect().top;  
+  emailLinks.forEach(link => {
+    link.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      copyToClipboard(link.textContent.trim(), link);
+    });
+  });
 
-  function onScroll() {  
-      const viewportHeight = window.innerHeight;  
-      if (elementPosition < viewportHeight) {  
-          element.classList.add('active');  
-      }  
-  }  
-
-  window.addEventListener('scroll', onScroll);  
-  window.addEventListener('load', onScroll); // Check on page load as well  
-});
-function onScroll() {  
-  const viewportHeight = window.innerHeight;  
-  
-  if (elementPosition < viewportHeight) {  
-      setTimeout(() => {  
-          element.classList.add('active');  
-      }, 300); // Change 300 to desired milliseconds  
-  }  
-}
-  // Smooth scrolling behavior  
-  document.querySelectorAll('nav a').forEach(anchor => {  
-    anchor.addEventListener('click', function (e) {  
-        e.preventDefault(); // Prevent the default anchor click behavior  
-        const targetId = this.getAttribute('href'); // Get the target section id  
-        const targetElement = document.querySelector(targetId); // Get the target element  
-
-        // Scroll to the element with a smooth behavior  
-        targetElement.scrollIntoView({  
-            behavior: 'smooth',  
-            block: 'start' // Adjusts where the section aligns in the viewport  
-        });  
-    });  
-});  
-// Get all the buttons  
-const buttons = document.querySelectorAll('.li');  
-
-// Add click event listeners to each button  
-buttons.forEach(button => {  
-    button.addEventListener('click', () => {  
-        // Remove the 'active' class from all buttons  
-        buttons.forEach(btn => {  
-            btn.classList.remove('active');  
-        });  
-        // Add the 'active' class to the clicked button  
-        button.classList.add('active');  
-    });  
-});
-let isWhiteBackground = false; // Initial state  
-
-document.getElementById('colorButton').addEventListener('click', function() {  
-  if (isWhiteBackground) {  
-    // Change background to black and text to white  
-    document.body.style.backgroundColor = '#141516'; // Black background  
-    document.body.style.color = '#FFFFFF'; // White text  
-  } else {  
-    // Change background to white and text to black  
-    document.body.style.backgroundColor = '#FFFFFF'; // White background  
-    document.body.style.color = '#141516'; // Black text  
-  }  
-  
-  // Toggle the state  
-  isWhiteBackground = !isWhiteBackground;  
+  phoneLinks.forEach(link => {
+    link.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      copyToClipboard(link.textContent.trim(), link);
+    });
+  });
 });

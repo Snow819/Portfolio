@@ -1,289 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="icon" href="favicon_io (1)/android-chrome-512x512.png" type="image/png">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="portfolio.css">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
-  <link rel="stylesheet" href="https://cdn.rawgit.com/michalsnik/aos/2.3.1/dist/aos.css">  
-  <script src="https://cdn.rawgit.com/michalsnik/aos/2.3.1/dist/aos.js"></script>
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- favicon -->
+  <link rel="icon" href="./asset/favicon.ico" type="image/png">
+  <!-- title -->
+  <title>Portfolio</title>
 </head>
+<!-- internal css -->
+<style>
+  body {
+    background-color: #141516;
+  }
+
+  .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    width: 160px;
+    height: 100px;
+    margin-left: -80px;
+    margin-top: -50px;
+    border-radius: 5px;
+    background: #ac04ac;
+    animation: dot1_ 3s cubic-bezier(0.55, 0.3, 0.24, 0.99) infinite;
+  }
+
+  .loader:nth-child(2) {
+    z-index: 11;
+    width: 150px;
+    height: 90px;
+    margin-top: -45px;
+    margin-left: -75px;
+    border-radius: 3px;
+    background: #5d295d;
+    animation-name: dot2_;
+  }
+
+  .loader:nth-child(3) {
+    z-index: 12;
+    width: 40px;
+    height: 20px;
+    margin-top: 50px;
+    margin-left: -20px;
+    border-radius: 0 0 5px 5px;
+    background: #f9c5f9;
+    animation-name: dot3_;
+  }
+
+  @keyframes dot1_ {
+
+    3%,
+    97% {
+      width: 160px;
+      height: 100px;
+      margin-top: -50px;
+      margin-left: -80px;
+    }
+
+    30%,
+    36% {
+      width: 80px;
+      height: 120px;
+      margin-top: -60px;
+      margin-left: -40px;
+    }
+
+    63%,
+    69% {
+      width: 40px;
+      height: 80px;
+      margin-top: -40px;
+      margin-left: -20px;
+    }
+  }
+
+  @keyframes dot2_ {
+
+    3%,
+    97% {
+      height: 90px;
+      width: 150px;
+      margin-left: -75px;
+      margin-top: -45px;
+    }
+
+    30%,
+    36% {
+      width: 70px;
+      height: 96px;
+      margin-left: -35px;
+      margin-top: -48px;
+    }
+
+    63%,
+    69% {
+      width: 32px;
+      height: 60px;
+      margin-left: -16px;
+      margin-top: -30px;
+    }
+  }
+
+  @keyframes dot3_ {
+
+    3%,
+    97% {
+      height: 20px;
+      width: 40px;
+      margin-left: -20px;
+      margin-top: 50px;
+    }
+
+    30%,
+    36% {
+      width: 8px;
+      height: 8px;
+      margin-left: -5px;
+      margin-top: 49px;
+      border-radius: 8px;
+    }
+
+    63%,
+    69% {
+      width: 16px;
+      height: 4px;
+      margin-left: -8px;
+      margin-top: -37px;
+      border-radius: 10px;
+    }
+  }
+
+  #content {
+    display: none;
+  }
+
+  @keyframes spinner-4t3wzl {
+    0% {
+      transform: rotate(0deg) translateY(-200%);
+    }
+
+    60%,
+    100% {
+      transform: rotate(360deg) translateY(-200%);
+    }
+
+  }
+</style>
+
 <body>
-  <!-- From Uiverse.io by AqFox --> 
+  <!-- Pre~loader -->
   <div class="container" id="preloader">
     <div class="loader"></div>
     <div class="loader"></div>
     <div class="loader"></div>
   </div>
-  <div id="content">
-    <!-- <img src="favicon_io (1)/android-chrome-512x512.png" alt="logo" style="display: none;"> -->
-    <nav class="animate__animated  animate__fadeInDown">
 
-        <h6>ABDULBASIT.</h6>
-        <ul class="hero_page_list" id="menu">
-          <li><a href="#intro">INTRO</a></li>
-          <li><a href="#about">ABOUT</a></li>
-          <li><a href="#works">WORKS</a></li>
-          <li><a href="#hello">SAY HELLO</a></li>
-      </ul>
-       <div>
-        <button id="menuButton"><i class="bi bi-list"></i></button>
-      </div>
-     
-      
-   </nav>
-
-<div class="portfolio-intro" id="intro"  >
-<!-- <div class="portfolio-dark-theme">
-  <button id="colorButton"><i class="bi bi-brightness-high-fill"></i></button>
-</div> -->
-  <div>
-     <div class="portfolio-intro-HELLO">
-      <div>
-          <hr class="animate__animated  animate__fadeInLeft">
-      </div>
-      <div>
-         <h4 class="animate__animated  animate__fadeInLeft">HELLO WORLD</h4>
-      </div>
-  </div>
-  </div>
-  <div class="portfolio-intro-about">
-     <div>
-       <h1 class="animate__animated  animate__fadeInRight">
-          I am Abdulbasit,<br> a digital designer, <br> frontend <br>developer & and a junior robotics engineer <br> based in ogunstate.
-       </h1>
-  </div>
-  <div>
-     <ul>
-      <sub ><a href="https://wa.me/2348056627716">WHATSAPP</a></sub> 
-      <sub>TWITTER</sub>
-      <sub>REDDIT</sub>
-      <sub>INSTAGRAM</sub>
-     </ul>
-  </div>
-  </div>
-</div> 
-<div class="portfolio-about" id="about" >
-  <div  >
-      <img src="abdulbasit.jpeg" alt="alt">
-  </div>
-  <div class="portfolio-about-info">
-      <div class="portfolio-about-head">
-          <div>
-              <hr>
-          </div>
-          <div>
-              <p>ABOUT</p>
-          </div>
-      </div>
-      <p>I'm a front-end developer specializing in responsive, <br> user-friendly web applications, with a background in robotics <br> engineering.  I blend intuitive interfaces with technical <br> robotics  knowledge, bridging the digital and mechanical <br> worlds  through thoughtful design and implementation. <br>My unique combination of skills allows me  <br> to create accessible user experiences for complex systems,<br> whether I'm building interactive web platforms or developing <br> control interfaces for robotic applications. I'm passionate <br>about combining clean code with innovative <br> solutions that make technology more accessible and <br>enjoyable for all users.</p>
-      <a href="/SANSALIU-ABDULBASIT.CV.pdf" download="SANSALIU-ABDULBASIT.CV.pdf"><button>DOWNLOAD CV</button></a>
-  </div>
-  
-</div>
-<div class="portfolio-expertise">
-   <p>EXPERTISE</p>
-   <h2>Front-end technologies (HTML, CSS, JavaScript, relevant frameworks like React/Vue/Angular),Robotics experience(programming language like Python/C++,platforms like ROS, hardware experience)And(embedded systems UIs, IoT interfaces, visualization tools)</h2>
-</div>
-<div class="portfolio-Experience">
-  <div>
-      <p>EXPERIENCE</p>
-      <div class="EXPERIENCE">
-          <li>T.T.A Partnership</li>
-          <sup>ROBOTICS Educator</sup>
-          <p>SEPTEMBER 2024 - PRESENT </p>
-          <b>As a robotics educator at TTA, I've designed and <br> implemented  hands-on curriculum that introduces <br> students to the fundamentals of robotics engineering through <br> interactive, project-based learning experiences. <br>I combine my front-end development skills with robotics <br> knowledge to create comprehensive learning <br>modules that help students understand both the <br>mechanical and programming aspects of robotic <br> systems.</b>
-      </div>
-      <div class="EXPERIENCE">
-          <li>T.T.A</li>
-          <sup>Frontend Developer</sup>
-          <p>JANUARY 2024 - PRESENT</p>
-          <b>As a front-end developer, I specialize in building <br>responsive and user-friendly web applications. <br> My expertise includes HTML, CSS, JavaScript, and modern <br>frameworks like React. I focus on creating visually appealing <br>and high-performance interfaces, ensuring a seamless <br> user experience across different devices.</b>
-      </div>
-  </div>
-  <div>
-      <p>EDUCATION</p>
-      <div class="EXPERIENCE">
-          <li>T.T.A</li>
-          <sup>Master in Web Development</sup>
-          <p>JANUARY 2024</p>
-          <b>During 2024, I dedicated myself to refining my front-end <br> development skills. I advanced my proficiency <br> in HTML5, CSS3, JavaScript ES6+, and vue.js while <br> mastering responsive design techniques and improving my <br> development workflow. Through project-based learning, <br>I transformed theoretical knowledge into practical skills <br>for building intuitive, performant web <br> applications.</b>
-         
-      </div>
-      <div class="EXPERIENCE">
-          <li>OOU</li>
-          <sup>Bsc Degree in Computer Science</sup>
-          <p>SEPTEMBER 2019</p>
-          <b>I studied Computer Science at Olabisi Onabanjo University <br> (OOU) from 2019 to 2023, gaining a solid foundation <br> in programming principles, algorithms, and data <br>structures while developing analytical thinking and <br>problem-solving abilities through hands-on projects.</b>
-      </div>
-  </div>
-</div>
-<div class="portfolio-recent-work" id="works">
-  <p>RECENT WORKS</p>
-  <h1>Here are some of my favorite projects I have done lately. Feel free to check them out.</h1>
-<div class="portfolio-recent-work-website">
-  <div class="portfolio-recent-work-website-container">
-      <img src="Screenshot 2025-01-22 11.05.58 AM.png" alt="img">
-      <div>
-          <sup>website</sup>
-          <h4 ><a href="https://ogunstate-website-avay.vercel.app/" target="_blank">Ogunstate website</a>
-</h4>
-      </div>
-      <i class="bi bi-arrow-up-right"></i>
-  </div>
-  <div class="portfolio-recent-work-website-container">
-      <img src="plotvista.png" alt="img">
-      <div>
-          <sup>website</sup>
-          <h4><a href="https://real-estate-one-lac.vercel.app/" target="_blank">Real Estate</a></h4>
-      </div>
-      <i class="bi bi-arrow-up-right"></i>
-  </div>
-  <div class="portfolio-recent-work-website-container">
-      <img src="Ewprogram.png" alt="img">
-      <div>
-          <sup>website</sup>
-          <h4><a href="https://ewprogram.vercel.app/" target="_blank">Ew Program</a></h4>
-      </div>
-      <i class="bi bi-arrow-up-right"></i>
-  </div>
-  <div class="portfolio-recent-work-website-container">
-      <img src="Screenshot 2025-01-22 11.05.58 AM.png" alt="img">
-      <div>
-          <sup>website</sup>
-          <h4><a href="https://rfcofoundation.org/" target="_blank">RFCO Foundation</a></h4>
-      </div>
-      <i class="bi bi-arrow-up-right" ></i>
-  </div>
-</div>
-
-</div>
-<!-- <div class="carousel">
-      <ul class="pagination">
-        <li class="page-item disabled">
-          <a class="page-link">Previous</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item active" aria-current="page">
-          <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link" href="#">Next</a>
-        </li>
-      </ul>
-</div> -->
-<div class="carousel-wrap">
-  <div class="testimonial-carousel">
-      <div class="carousel-container">
-        <div class="carousel-item active">
-          <div class="profile">
-            <img src="person1.jpg" alt="Tim Cook">
-            <div class="details">
-              <h3>Tim Cook</h3>
-              <p>CEO, Apple</p>
-            </div>
-          </div>
-          <p class="testimonial-text">
-            Molestiae incidunt consequatur quis ipsa autem nam sit enim magni. Voluptas tempore rem.
-          </p>
-        </div>
-        <div class="carousel-item">
-          <div class="profile">
-            <img src="person2.jpg" alt="Sundar Pichai">
-            <div class="details">
-              <h3>Sundar Pichai</h3>
-              <p>CEO, Google</p>
-            </div>
-          </div>
-          <p class="testimonial-text">
-            Excepturi nam cupiditate culpa doloremque deleniti repellat. Voluptatem dignissimos ut ducimus accusantium.
-          </p>
-        </div>
-        <div class="carousel-item">
-          <div class="profile">
-            <img src="person3.jpg" alt="Satya Nadella">
-            <div class="details">
-              <h3>Satya Nadella</h3>
-              <p>CEO, Microsoft</p>
-            </div>
-          </div>
-          <p class="testimonial-text">
-            Laudantium quia consequatur molestias delectus culpa. Nisi dolores quaerat fuga rem nihil nostrum.
-          </p>
-        </div>
-        <div class="carousel-item">
-          <div class="profile">
-            <img src="person4.jpg" alt="Elon Musk">
-            <div class="details">
-              <h3>Elon Musk</h3>
-              <p>CEO, Tesla</p>
-            </div>
-          </div>
-          <p class="testimonial-text">
-            Quasi voluptas eius distinctio atque eos maxime. Voluptatem explicabo a quaerat ut doloribus.
-          </p>
-        </div>
-      </div>
-      <div class="indicators">
-        <span class="dot active" onclick="currentSlide(0)"></span>
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-      </div>
-    </div>
-</div>
-<div class="portfolio-say-hello" id="hello" style="transition: 0.5s;" >
-  <p>GET IN TOUCH</p>
-  <h1>I love to hear from you. Whether you have a question or just want to chat about design, tech & art — shoot me a message.</h1>
-  <div class="portfolio-say-hello-wrap">
-      <div>
-          <h3>REACH ME AT</h3>
-          <b><a href="mailto:sansaliuabdulbasit81@gmail.com">sayhello@Abdulbasit.com</a></b><br>
-          <b><a href="tel:+2349069036714"> +234 906 903 6714</a></b>
-      </div>
-      <div>
-          <h3>SOCIAL</h3>
-          <div>
-              <b>INSTAGRAM,</b>
-              <b>FACEBOOK,</b>
-              <b><a href="https://www.linkedin.com/in/sansaliu-abdulbasit-3697401b7" target="_blank">  
-                LINKEDIN,  
-            </a></b><br>
-              <b>SNAPCHAT,</b>
-              <b><a href="https://github.com/Snow819" target="_blank">  
-                GITHUB 
-            </a></b>
-          </div>
-      </div>
-      <div>
-          <button><a href="mailto:sansaliuabdulbasit81@gmail.com">SAY HELLO.</a></button>
-      </div>
-  </div>
-</div>
-<footer>
-    <p><i class="bi bi-c-circle"></i>Copyright Abdulbasit 2024</p>
-     <p>Design by <b>Snow819</b> Distribution By <b>SNOW819</b></p>
-</footer>
-<script src="script.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
- <script>  
-    AOS.init();  
-</script>
-  </div>
-  
+  <!-- Script -->
+  <script>
+    // Redirect to portfolio.html after 3 seconds
+    setTimeout(function () {
+      window.location.href = "portfolio.html";
+    }, 3000);
+  </script>
 </body>
+
 </html>
