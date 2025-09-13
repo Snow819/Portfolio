@@ -494,6 +494,7 @@ nav button {
     line-height: 1.8rem;
     letter-spacing: normal;
     margin-bottom: 1.5rem;
+    text-align: start;
 }
 
 /* Button */
@@ -549,6 +550,8 @@ nav button {
 
 /* Portfolio Experience Section */
 .portfolio-experience {
+    display: flex;
+    justify-content: space-between;
     gap: 40px;
     padding: 60px 35px;
     color: #222;
@@ -1364,6 +1367,7 @@ nav button {
     }
 
     .about-header p {
+        text-align: center;
         font-size: 1.8rem;
     }
 
@@ -1378,6 +1382,6 @@ nav button {
     }
 
     .portfolio-experience {
-        grid-template-columns: 1fr;
+        flex-direction: column;
     }
 }
